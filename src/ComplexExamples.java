@@ -113,16 +113,6 @@ public class ComplexExamples {
                 Value:1
          */
 
-/*        Map<String, Long> map = Arrays.stream(RAW_DATA)
-                .filter(Objects::nonNull)
-                .distinct()
-                .sorted(Comparator.comparing(Person::getId))
-                .collect(Collectors.groupingBy(Person::getName, Collectors.counting()));
-        for (Map.Entry<String, Long> entry : map.entrySet()) {
-            System.out.println("Key: " + entry.getKey());
-            System.out.println("Value: " + entry.getValue());
-        }*/
-
         Map<String, Long> persons = Arrays.stream(RAW_DATA)
                 .filter(Objects::nonNull)
                 .distinct()
@@ -145,7 +135,7 @@ public class ComplexExamples {
             Реализовать функцию нечеткого поиска
          */
 
-        System.out.println("\nFind function:");
+        System.out.println("Find function:");
         fuzzySearch("car", "ca6$$#_rtwheel"); // true
         fuzzySearch("cwhl", "cartwheel"); // true
         fuzzySearch("cwhee", "cartwheel"); // true
@@ -163,21 +153,9 @@ public class ComplexExamples {
     public static void findPair(int[] arr, int sum) {
         IntStream.range(0, arr.length).forEach(i -> IntStream.range(i + 1, arr.length).forEach(j -> {
             if ((arr[i] + arr[j]) == sum) {
-                System.out.printf("[%d, %d]", arr[i], arr[j]);
+                System.out.printf("[%d, %d]\n", arr[i], arr[j]);
             }
         }));
-
-/*
-        // Вариант с выводом только первой пары + если не найдена пара уведомление
-        for (int i = 0; i < arr.length - 1; i++) {
-            for (int j = i + 1; j < arr.length; j++) {
-                if ((arr[i] + arr[j]) == sum) {
-                    System.out.printf("[%d, %d]", arr[i], arr[j]);
-                    return;
-                }
-            }
-        }
-        System.out.println("Pair not found"); */
     }
 
     /**
