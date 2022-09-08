@@ -85,7 +85,7 @@ public class ComplexExamples {
         1 - Jack (4)
      */
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         System.out.println("Raw data:");
         System.out.println();
 
@@ -116,7 +116,9 @@ public class ComplexExamples {
         Map<String, Long> persons = Arrays.stream(RAW_DATA)
                 .filter(Objects::nonNull)
                 .distinct()
+                .sorted(Comparator.comparing(Person::getId))
                 .collect(groupingBy(Person::getName, Collectors.counting()));
+
         persons.forEach((key, value) -> System.out.println("Key: " + key + "\nValue:" + value));
 
         /*
@@ -127,7 +129,9 @@ public class ComplexExamples {
 
         int[] input = {3, 4, 2, 7};
         int number = 10;
+
         System.out.println("Print pairs with sum = " + number);
+
         findPair(input, number);
 
         /*
@@ -150,12 +154,19 @@ public class ComplexExamples {
      * @param arr массив чисел
      * @param sum требуемое значение суммы 2 чисел
      */
-    public static void findPair(int[] arr, int sum) {
-        IntStream.range(0, arr.length).forEach(i -> IntStream.range(i + 1, arr.length).forEach(j -> {
-            if ((arr[i] + arr[j]) == sum) {
-                System.out.printf("[%d, %d]\n", arr[i], arr[j]);
+    public static void findPair(int[] arr, int sum) throws Exception {
+        if (arr == null) throw new Exception("Array is empty");
+
+        for (int i = 0; i < arr.length - 1; i++) {
+            for (int j = i + 1; j < arr.length; j++) {
+                if ((arr[i] + arr[j]) == sum) {
+                    System.out.printf("[%d, %d]\n", arr[i], arr[j]);
+                    return;
+                }
             }
-        }));
+        }
+
+        System.out.println("Pair not found");
     }
 
     /**
@@ -163,7 +174,9 @@ public class ComplexExamples {
      * @param whatToLook что искать
      * @param whereToLook где искать
      */
-    public static void fuzzySearch(String whatToLook, String whereToLook){
+    public static void fuzzySearch(String whatToLook, String whereToLook) throws Exception {
+        if (whatToLook == null || whereToLook == null) throw new Exception("Argument is null");
+
         int count = 0;
         int wordIndex = 0;
         int phraseIndex = 0;
@@ -172,12 +185,13 @@ public class ComplexExamples {
         char[] phraseArray = whereToLook.toCharArray();
 
         while (wordIndex < wordArray.length && phraseIndex < phraseArray.length){
-            if(Objects.equals(wordArray[wordIndex], phraseArray[phraseIndex])){
+            if (wordArray[wordIndex] == phraseArray[phraseIndex]){
                 count++;
                 wordIndex++;
             }
             phraseIndex++;
         }
+
         System.out.println(count == wordArray.length);
     }
 }
