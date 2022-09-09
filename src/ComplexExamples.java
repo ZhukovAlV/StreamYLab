@@ -1,6 +1,5 @@
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.groupingBy;
 
@@ -85,7 +84,7 @@ public class ComplexExamples {
         1 - Jack (4)
      */
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         System.out.println("Raw data:");
         System.out.println();
 
@@ -154,8 +153,11 @@ public class ComplexExamples {
      * @param arr массив чисел
      * @param sum требуемое значение суммы 2 чисел
      */
-    public static void findPair(int[] arr, int sum) throws Exception {
-        if (arr == null) throw new Exception("Array is empty");
+    public static void findPair(int[] arr, int sum) {
+        if (arr == null) {
+            System.out.println("Array is empty");
+            return;
+        }
 
         for (int i = 0; i < arr.length - 1; i++) {
             for (int j = i + 1; j < arr.length; j++) {
@@ -174,8 +176,11 @@ public class ComplexExamples {
      * @param whatToLook что искать
      * @param whereToLook где искать
      */
-    public static void fuzzySearch(String whatToLook, String whereToLook) throws Exception {
-        if (whatToLook == null || whereToLook == null) throw new Exception("Argument is null");
+    public static void fuzzySearch(String whatToLook, String whereToLook) {
+        if (whatToLook == null || whereToLook == null) {
+            System.out.println("Argument is null");
+            return;
+        }
 
         int count = 0;
         int wordIndex = 0;
